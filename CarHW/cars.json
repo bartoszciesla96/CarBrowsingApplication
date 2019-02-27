@@ -1,0 +1,38 @@
+{
+  "cars": [
+    {
+      "model": "MAZDA",
+      "mileage": 180,
+      "price": 100000,
+      "color": "NICE",
+      "components": [
+        "AC",
+        "REAR WIPER",
+        "FOUR WHEEL DRIVE"
+      ]
+    },
+    {
+      "model": "BMW",
+      "mileage": 200,
+      "price": 110000,
+      "color": "OK",
+      "components": [
+        "ASR",
+        "WEBASTO",
+        "ELECTRIC WINDOWS"
+      ]
+    },
+    {
+      "model": "AUDI",
+      "mileage": 220,
+      "price": 120000,
+      "color": "UGLY",
+      "components": [
+        "ASR",
+        "ESP",
+        "QUATTRO"
+      ]
+    }
+  ],
+  "filename": "cars.json"
+}

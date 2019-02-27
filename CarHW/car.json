@@ -1,0 +1,11 @@
+{
+  "model": "BMW",
+  "mileage": 200,
+  "price": 120000,
+  "color": "NICE",
+  "components": [
+    "AC",
+    "ESP",
+    "HEATED SEATS"
+  ]
+}
