@@ -1,6 +1,7 @@
 package car.homework.service;
 
 import car.homework.exceptions.MyException;
+import car.homework.model.enums.Color;
 import car.homework.service.enums.SortType;
 
 import java.math.BigDecimal;
@@ -42,12 +43,12 @@ public class UserDataService {
         }
     }
 
-    public SortType getSortType() {
 
+    public SortType getSortType() {
         System.out.println("1 - price");
-        System.out.println("2 - price");
-        System.out.println("3 - price");
-        System.out.println("4 - price");
+        System.out.println("2 - model");
+        System.out.println("3 - color");
+        System.out.println("4 - mileage");
         System.out.println("Enter sort type");
         String text = scanner.nextLine();
 
@@ -61,6 +62,23 @@ public class UserDataService {
         }
 
         return SortType.values()[option - 1];
+    }
+
+    public Color getColor() {
+        System.out.println("1 - nice");
+        System.out.println("2 - ugly");
+        System.out.println("3 - ok");
+        String text = scanner.nextLine();
+
+        if (!text.matches("\\d")) {
+            throw new MyException("COLOR VALUE IS NOT VALID");
+        }
+
+        int option = Integer.parseInt(text);
+        if (option < 1 || option > 3) {
+            throw new MyException("COLOR VALUE IS NOT VALID");
+        }
+        return Color.values()[option - 1];
     }
 
     public void close() {

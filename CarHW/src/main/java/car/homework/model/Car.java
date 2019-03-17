@@ -24,7 +24,7 @@ public class Car {
     private Color color;
     private Set<String> components;
 
-    /* LEGACY VALIDATOR USING BUILDER
+/* LEGACY VALIDATOR USING BUILDER
     private Car(CarBuilder carBuilder) {
         model = carBuilder.model;
         mileage = carBuilder.mileage;

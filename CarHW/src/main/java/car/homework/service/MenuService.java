@@ -3,9 +3,11 @@ package car.homework.service;
 import car.homework.exceptions.MyException;
 import car.homework.model.Car;
 import car.homework.model.enums.Color;
+import car.homework.service.enums.SortType;
 import car.homework.validation.CarValidator;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 public class MenuService {
@@ -76,11 +78,12 @@ public class MenuService {
     }
 
     private int printMenu() {
+        System.out.println("-------------- MENU --------------");
         System.out.println("1. Add new car");
         System.out.println("2. Reset cars to default from jsonfile");
         System.out.println("3. Print all cars");
         System.out.println("4. Sort cars by given value");
-        System.out.println("5. Show cars about given mileage");
+        System.out.println("5. Show cars above given mileage");
         System.out.println("6. Count cars by given color");
         System.out.println("7. Show most expensive car models");
         System.out.println("8. Show car statistics");
@@ -98,16 +101,17 @@ public class MenuService {
         model = model.toUpperCase();
         int mileage = userDataService.getInt("Car mileage = ");
         BigDecimal price = userDataService.getBigDecimal("Car price = ");
-        System.out.println("Color: 0 = NICE, 1 = UGLY, 2 = OK");
-        int color = userDataService.getInt("Car color  = ");
-        if (color != 0 || color != 1 || color != 2) {
-            throw new MyException("COLOR VALUE IS NOT CORRECT");
-            Set<String> components = null;
+        Color color = userDataService.getColor();
+
+
+            Set<String> components = new HashSet<>();
 
             boolean cont = true;
             String component = null;
             String yn = "y";
             while (cont) {
+
+                //NULLPOINTER TUTAJ
                 component = userDataService.getString("Car component = ");
                 components.add(component);
                 yn = userDataService.getString("Do you want to add another component y/n ");
@@ -121,7 +125,7 @@ public class MenuService {
             carValidator.validate(car);
             carsService.addCar(car);
         }
-    }
+
 
     private void option2() {
         System.out.println("Resetting cars collection");
@@ -130,30 +134,30 @@ public class MenuService {
 
     private void option3() {
         System.out.println("Cars: ");
-        carsService.toString();
+        carsService.showAllCars();
     }
     private void option4() {
         System.out.println("Sort cars by field");
-        int sortType = userDataService.getInt("Choose field (0 - model/1 - mileage/2 - price/3 - color/4 - components) = ");
-        String desc = userDataService.getString("Descending y/n");
+        SortType sortType = userDataService.getSortType();
+        String desc = userDataService.getString("Descending y/n ");
         boolean descending = true;
-        if (desc.equals("y")) { descending = true; }
-        else { descending = false; }
-        carsService.sort(sortType, descending);
+        if (desc.equals("y")) { descending = false; }
+        else { descending = true; }
+        System.out.println(carsService.sort(sortType, descending));
     }
     private void option5() {
         System.out.println("Showing cars above mileage");
         int mileage = userDataService.getInt("Choose mileage = ");
-        carsService.showCarsAboveMileage(mileage);
+        System.out.println(carsService.showCarsAboveMileage(mileage));
     }
 
     private void option6() {
         System.out.println("Counting cars by color");
-        carsService.countedByColor();
+        System.out.println(carsService.countedByColor());
     }
     private void option7() {
         System.out.println("Most expensive car model: ");
-        carsService.carModelsWithMostExpensiveCar();
+        System.out.println(carsService.carModelsWithMostExpensiveCar());
     }
     private void option8() {
         System.out.println("Showing car statistics: ");
@@ -162,23 +166,23 @@ public class MenuService {
 
     private void option9() {
         System.out.println("Showing most expensive cars: ");
-        carsService.mostExpensiveCar();
+        System.out.println(carsService.mostExpensiveCar());
     }
 
     private void option10() {
         System.out.println("Sorting car components: ");
-        carsService.sortComponents();
+        System.out.println(carsService.sortComponents());
     }
 
     private void option11() {
         System.out.println("Counting cars with component: ");
-        carsService.carContainsComponent();
+        System.out.println(carsService.carContainsComponent());
     }
 
     private void option12() {
         System.out.println("Showing cars in price range: ");
         BigDecimal a = userDataService.getBigDecimal("Price from: ");
         BigDecimal b = userDataService.getBigDecimal("to: ");
-        carsService.showCarsInPriceRange(a, b);
+        System.out.println(carsService.showCarsInPriceRange(a, b));
     }
 }

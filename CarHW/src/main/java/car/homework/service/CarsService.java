@@ -45,7 +45,14 @@ public class CarsService {
         if (car == null) {
             throw new MyException("CAR OBJECT IS NULL");
         }
-        cars.add(car);
+        CarValidator carValidator = new CarValidator();
+        carValidator.validate(car);
+        if(carValidator.hasErrors()) {
+            throw new MyException("CAR IS INVALID");
+        }
+        else {
+            cars.add(car);
+        }
     }
 
     //method that reloads cars collection to the default value (from json file)
@@ -64,6 +71,7 @@ public class CarsService {
     }
 
     //method that sorts cars by requested value
+    //SORTOWANIE NIE DZIALA
     public List<Car> sort(SortType sortType, boolean descending) {
         if (sortType == null) {
             throw new MyException("SORT TYPE IS NOT CORRECT");
@@ -207,8 +215,16 @@ public class CarsService {
             throw new MyException("GIVEN PRICE RANGE IS NOT CORRECT");
         }
         return cars.stream()
-                .filter(c -> c.getPrice().compareTo(a) >= 0 && c.getPrice().compareTo(b) <= 0)
+                .filter(c -> c.getPrice()
+                .compareTo(a) >= 0 && c.getPrice().compareTo(b) <= 0)
                 .sorted(Comparator.comparing(Car::getModel))
                 .collect(Collectors.toList());
+    }
+
+    //method that prints
+    public void showAllCars() {
+        for (Car c : cars) {
+            System.out.println(c);
+        }
     }
 }

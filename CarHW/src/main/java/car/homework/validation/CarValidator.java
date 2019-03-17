@@ -53,7 +53,7 @@ public class CarValidator {
     }
 
     private boolean isMileageValid(Car car) {
-        return car.getMileage() < 0;
+        return car.getMileage() > 0;
     }
 
 }
